@@ -11,6 +11,13 @@ export default function Lab3InputFocus() {
   };
 
   const clearInput = () => {
+    // 추가 기능
+    if (inputRef.current.value.trim() === "") {
+      alert("Field is empty");
+      inputRef.current.focus();
+      return;
+    }
+
     // TODO 3: input의 값을 지우고 다시 Focus
     inputRef.current.value = "";
     inputRef.current.focus() ; 

@@ -152,6 +152,22 @@ const time = mm + ":" + ss;
 - time is joining to use, 
 - The screen shows time instead of count
 
+### Input 값 검증 기능 (LAB 3)
+
+```jsx
+// 추가 기능
+    if (inputRef.current.value.trim() === "") {
+      alert("Field is empty");
+      inputRef.current.focus();
+      return;
+    }
+```
+
+- When Clear is clicked, it first checks if the input is empty.
+- trim() to see if its empty
+- If empty, alert shows "Field is empty", focus goes back to the input, and return stops the function.
+- If not empty, it clears the input and focuses like before.
+
 ## 7. Deployment: 실제 접근 가능한 Vercel URL
 week12-starter-project-xi.vercel.app
 
