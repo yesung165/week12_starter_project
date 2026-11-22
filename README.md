@@ -133,3 +133,21 @@ const stop = () => {
 - LAB 4, The timer is controlled directly in the event handlers. start() calls setInterval themselves, and the timer ID is kept in timerRef.current. useEffect is only used for the cleanup on unmount.
 - Duplicate prevention like the timers being added, LAB 2 relies on cleanup and the dependency array, LAB 4 checks timerRef.current !== null before starting.
 
+
+
+## 6. Customizing
+### Timer Count를 분/초 형식으로 표시
+
+```jsx
+const minutes = Math.floor(count / 60);
+const seconds = count % 60;
+const mm = minutes < 10 ? "0" + minutes : minutes;
+const ss = seconds < 10 ? "0" + seconds : seconds;
+const time = mm + ":" + ss;
+```
+
+- minutes, count divided by 60, Math.floor drops the decimal. 
+- seconds, the remainder 
+- mm, ss, if the number is less than 10, add 0 infront so it is always 2 digits.
+- time is joining to use, 
+- The screen shows time instead of count

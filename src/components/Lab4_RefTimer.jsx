@@ -42,10 +42,17 @@ export default function Lab4RefTimer() {
     };
   }, []);
 
+  // 추가 기능
+  const minutes = Math.floor(count / 60); 
+  const seconds = count % 60; 
+  const mm = minutes < 10 ? "0" + minutes : minutes; // if smaller than 10
+  const ss = seconds < 10 ? "0" + seconds : seconds;
+  const time = mm + ":" + ss;
+
   return (
     <div>
       <p className="status">상태: {running ? 'Running' : 'Stopped'}</p>
-      <div className="count">{count}</div>
+      <div className="count">{time}</div>
       <div className="controls">
         <button onClick={start} disabled={running}>Start</button>
         <button className="secondary" onClick={stop} disabled={!running}>Stop</button>
