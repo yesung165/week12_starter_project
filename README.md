@@ -34,3 +34,17 @@ npm run dev
 - Lab2_TimerControl.jsx: Connects state and Effect to control the timer.State handles Start,Stop,Reset, and useEffect(..., [running]) creates and cleans up the timer whenever running changes.
 - Lab3_InputFocus.jsx: Uses useRef to access the real input DOM element and use the Focus and Clear buttons.
 - Lab4_RefTimer.jsx: Improves the Lab 2 timer by storing the timer ID in a useRef and controlling the timer directly from the Start Stop Reset button handlers.
+
+## 2. useEffect: Effect, Dependency Array 및 Cleanup의 동작 원리
+
+- Render, commit Effect, Render changes UI, commit changes the real DOM and Effect syncs with the outside sytem. 
+
+Effect
+- Things that interact outside the system in react, such as timers, browser events, and API requests. If there is nothing to sync with outside React, useEffect is not needed.
+
+Dependency Array: Decides when the Effect runs again.
+- useEffect(fn, []) runs only once, at the first mount.
+- useEffect(fn) with no array runs every time the component commits. In Lab 1, count changes every second, so the Effect also re-runs every second instead of once.
+
+Cleanup
+- It cleans up what the previous Effect did. It runs right before the Effect runs again because a dependency changed, and when the component unmounts.The timer keeps running after the component is gone and timers can pile up if no cleanup.
