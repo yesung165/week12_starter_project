@@ -21,7 +21,8 @@ export default function Lab1EffectTimer() {
     };
 
     // TODO 4: Dependency Array가 []일 때와 생략했을 때의 차이 관찰
-  }, []);
+    //there is a cleanup every run when [] is not there
+  },[]);
 
   return (
     <div>
