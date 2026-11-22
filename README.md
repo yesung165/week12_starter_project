@@ -48,3 +48,15 @@ Dependency Array: Decides when the Effect runs again.
 
 Cleanup
 - It cleans up what the previous Effect did. It runs right before the Effect runs again because a dependency changed, and when the component unmounts.The timer keeps running after the component is gone and timers can pile up if no cleanup.
+
+
+## 3. useRef: .current 속성과 useState의 차이
+ 
+useRef stores a value that stays the same between renders or references to DOM\
+
+- useState uses count, useRef uses ref.current to access values
+- useState uses setter (like setCount), useRef is assigned directly with ref.current = to change values
+- Re-render, changing state causes a re-render, changing ref.current does not.
+- but both keep values on re-render
+- useState is for values shown on screen. useRef is for DOM references and internal values, such as timer IDs.
+
