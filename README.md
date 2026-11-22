@@ -23,3 +23,14 @@ npm run dev
 3. Cleanup은 언제 실행되는가? 개발 환경 StrictMode 영향은?
 4. `useState`와 `useRef`의 값 변경 시 렌더링 차이는?
 5. LAB 2와 LAB 4에서 Timer를 관리하는 방식의 차이는?
+
+# Source Code Analysis
+ 
+## 1.Project Structure: App.jsx와 주요 Lab 컴포넌트의 역할
+ 
+- src/main.jsx: renders <App/> into #root. The app is wrapped in React.StrictMode, so in development every Effect's setup and cleanup runs one extra time. 
+- src/App.jsx: The shared screen that shows the 4 labs as tabs. The labs array holds each lab's id, name, and component, and useState keeps track of the active tab. Only the selected lab is rendered, so switching tabs unmounts the previous lab and runs cleanap
+- Lab1_EffectTimer.jsx: Uses useEffect and setInterval to build a counter that goes up by one every second. For observing cleanup and comparing how often the Effect runs with [] 
+- Lab2_TimerControl.jsx: Connects state and Effect to control the timer.State handles Start,Stop,Reset, and useEffect(..., [running]) creates and cleans up the timer whenever running changes.
+- Lab3_InputFocus.jsx: Uses useRef to access the real input DOM element and use the Focus and Clear buttons.
+- Lab4_RefTimer.jsx: Improves the Lab 2 timer by storing the timer ID in a useRef and controlling the timer directly from the Start Stop Reset button handlers.
