@@ -60,3 +60,35 @@ useRef stores a value that stays the same between renders or references to DOM\
 - but both keep values on re-render
 - useState is for values shown on screen. useRef is for DOM references and internal values, such as timer IDs.
 
+## 4. Code Analysis: useEffect와 useRef 관련 주요 코드 각 1개(5~15줄)를 선택하여 동작 원리 설명
+
+ useEffect(() => {
+    // TODO 1: running이 false면 타이머를 만들지 않기
+    // TODO 2: running이 true면 setInterval로 1초마다 count 증가
+    // TODO 3: Cleanup에서 clearInterval 호출
+  }, [running]);
+
+
+
+  // TODO 1: 타이머 ID를 유지할 timerRef 생성 (초기값 null)
+
+  const start = () => {
+    // TODO 2: timerRef.current에 타이머가 있으면 중복 시작 방지
+    // TODO 3: setInterval의 반환 ID를 timerRef.current에 보관
+    // TODO 4: 1초마다 count 증가, running을 true로 변경
+  };
+
+  const stop = () => {
+    // TODO 5: clearInterval로 타이머 중지
+    // TODO 6: timerRef.current를 null로, running은 false로 변경
+  };
+
+  const reset = () => {
+    // TODO 7: stop() 실행 후 count를 0으로 초기화
+  };
+
+  useEffect(() => {
+    // TODO 8: 언마운트 시 Interval을 정리하는 Cleanup 작성
+  }, []);
+
+  not filled out yet, will fill after coding 
