@@ -19,8 +19,8 @@ export default function App() {
   return (
     <main className="page">
       <header className="hero">
-        <p className="eyebrow">OPEN SOURCE STUDIO · WEEK 12</p>
-        <h1>React Hooks Playground</h1>
+        <p className="eyebrow">OPEN SOURCE STUDIO · WEEK 12 - 22300778 Pyo Yesung</p>
+        <h1>Timer with Hooks</h1>
         <p>useEffect · Cleanup · useRef — 4개의 독립된 Lab</p>
       </header>
 
