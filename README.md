@@ -62,36 +62,51 @@ useRef stores a value that stays the same between renders or references to DOM\
 
 ## 4. Code Analysis: useEffect와 useRef 관련 주요 코드 각 1개(5~15줄)를 선택하여 동작 원리 설명
 
- useEffect(() => {
-    // TODO 1: running이 false면 타이머를 만들지 않기
-    // TODO 2: running이 true면 setInterval로 1초마다 count 증가
-    // TODO 3: Cleanup에서 clearInterval 호출
-  }, [running]);
+### useEffect — Lab2_TimerControl.jsx
 
+```jsx
+useEffect(() => {
+  if (!running) return;
 
+  const id = setInterval(() => {
+    setCount(prev => prev + 1);
+  }, 1000);
 
-  // TODO 1: 타이머 ID를 유지할 timerRef 생성 (초기값 null)
+  return () => clearInterval(id);
+}, [running]);
+```
 
-  const start = () => {
-    // TODO 2: timerRef.current에 타이머가 있으면 중복 시작 방지
-    // TODO 3: setInterval의 반환 ID를 timerRef.current에 보관
-    // TODO 4: 1초마다 count 증가, running을 true로 변경
-  };
+- when running is false the Effect ends right away
+- when running is true a timer is made that runs every 1 second.
+- setCount(prev => prev + 1) only runs again when running changes, prev always gets the latest value.
+- return () => clearInterval(id) acts as cleanup, and when the there is a tabswitch stops the timer
+- [running] makes it so the Effect only re-runs when running changes. count changing every second does not re-run it, so only one timer exists at a time.
 
-  const stop = () => {
-    // TODO 5: clearInterval로 타이머 중지
-    // TODO 6: timerRef.current를 null로, running은 false로 변경
-  };
+### useRef — Lab4_RefTimer.jsx
 
-  const reset = () => {
-    // TODO 7: stop() 실행 후 count를 0으로 초기화
-  };
+```jsx
+const timerRef = useRef(null);
 
-  useEffect(() => {
-    // TODO 8: 언마운트 시 Interval을 정리하는 Cleanup 작성
-  }, []);
+const start = () => {
+  if (timerRef.current !== null) return;
+  timerRef.current = setInterval(() => {
+    setCount(prev => prev + 1);
+  }, 1000);
+  setRunning(true);
+};
 
-  not filled out yet, will fill after coding 
+const stop = () => {
+  clearInterval(timerRef.current);
+  timerRef.current = null;
+  setRunning(false);
+};
+```
+
+- useRef(null) : makes a box { current: null } that keeps the same value between renders. null means no timer is running.
+- if a timer ID is already saved, start() does nothing to prevent duplications
+- the timer ID is saved directly in ref.current. Changing it does not cause a re-render
+- setRunning(true) / setRunning(false), running is state because it is shown on screen and disables the buttonsso need a re-render unlike timer ID
+- stop() clearInterval with the saved ID stops the timer, then timerRef.current = null so its a reset for an new timer, 
 
 
 ### 1. useEffect의 Dependency Array가 필요한 이유는?
