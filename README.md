@@ -92,3 +92,29 @@ useRef stores a value that stays the same between renders or references to DOM\
   }, []);
 
   not filled out yet, will fill after coding 
+
+
+### 1. useEffect의 Dependency Array가 필요한 이유는?
+
+- It tells React when the Effect should run again. React compares the values in the array with the previous render and re-runs the Effect only when one of them changed. Without it the Effect runs after every render. In Lab 1 count changes every second, so the timer would be cleaned up and created again every second.
+- [] means run once at mount, [running] means run again only when running changes 
+- Values used inside the Effect should be in the array if not then the Effect keeps using old values from the first render
+
+### 2. Cleanup을 사용하지 않으면 어떤 문제가 발생할 수 있는가?
+
+- The timer keeps running even after the component unmounts like going to the other lab tavs, and it tries to update state of a component that is gone.
+- Every time the Effect runs again, a new timer is added on top of the old one, so timers pile up and count will go up together.
+- StrictMode runs it twice, so without cleanup there are already 2 timers from the start.
+
+### 3. useState와 useRef의 가장 중요한 차이는?
+
+- Re-rendering. Changing state with a setter causes a re-render so the screen updates. Changing ref.current does not cause a re-render.
+- Both keep their value between renders.
+- So useState is for values shown on screen (count, running), and useRef is for values only the code needs like timerID and DOM.
+
+### 4. LAB 2와 LAB 4의 Timer 관리 방식은 어떻게 다른가?
+
+- LAB 2, The timer is controlled by state and useEffect. Buttons only change running, and useEffect( , [running]) creates the timer when running is true and clears it in cleanup when running changes. The timer ID is a local variable inside the Effect.
+- LAB 4, The timer is controlled directly in the event handlers. start() calls setInterval themselves, and the timer ID is kept in timerRef.current. useEffect is only used for the cleanup on unmount.
+- Duplicate prevention like the timers being added, LAB 2 relies on cleanup and the dependency array, LAB 4 checks timerRef.current !== null before starting.
+
