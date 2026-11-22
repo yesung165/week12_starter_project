@@ -151,3 +151,20 @@ const time = mm + ":" + ss;
 - mm, ss, if the number is less than 10, add 0 infront so it is always 2 digits.
 - time is joining to use, 
 - The screen shows time instead of count
+
+## 7. Deployment: 실제 접근 가능한 Vercel URL
+week12-starter-project-xi.vercel.app
+
+## 8. Weekly Review:
+### 새롭게 배운 내용 3가지
+- the difference between useEffect and useRef, 
+- The idea of re-rendering only being needed on things shown on screen (like timeID is not needed to be re-rendered)
+- Why cleanup is needed, what will happpen if not used (like timers being added up), it is kind of like a reset. 
+### 어려웠던 점과 해결 방법
+- The difficulties came with maybe trying to understand the theory behind the code, like source code explanation. 
+- And for adding new things, I couldn't come up with a clever way for using other Hooks to implement into the project or showing Timer 실행 상태 표시. It is not exactly clear what is being asked.
+
+
+### AI 활용 내용 및 느낀 점
+- a lot of the code was already explained in class and in the slides, i didn't really have much difficults forming the code itself, 
+- AI was used to explain some parts of the slide more in depth, so the questions in the README can be answered. 
